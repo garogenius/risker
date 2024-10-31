@@ -1,0 +1,135 @@
+---
+const steps = [
+  {
+    title: "Prerequisites",
+    commands: [
+      { description: "Check Python version:", command: "python3 --version" },
+      { description: "Install pip if not installed:", command: "sudo apt-get install python3-pip" }
+    ]
+  },
+  {
+    title: "Clone Repository",
+    commands: [
+      { description: "Clone the repository:", command: "git clone https://github.com/garogenius/risker.git" },
+      { description: "Navigate to project directory:", command: "cd risker" }
+    ]
+  },
+  {
+    title: "Install Dependencies",
+    commands: [
+      { description: "Install from requirements file:", command: "pip install -r requirements.txt" },
+      { 
+        description: "Or install individual packages:", 
+        command: "pip install paramiko tabulate pyfiglet termcolor tqdm" 
+      }
+    ]
+  },
+  {
+    title: "Global Installation",
+    commands: [
+      { description: "Install tool globally:", command: "pip install ." }
+    ]
+  },
+  {
+    title: "Verify Installation",
+    commands: [
+      { description: "Check installation:", command: "risker --help" }
+    ]
+  }
+];
+---
+
+<div class="installation-guide">
+  {steps.map((step, index) => (
+    <div class="installation-step">
+      <div class="step-header">
+        <div class="step-number">{index + 1}</div>
+        <h3>{step.title}</h3>
+      </div>
+      <div class="step-content">
+        {step.commands.map(cmd => (
+          <div class="command-block">
+            <p>{cmd.description}</p>
+            <pre><code>{cmd.command}</code></pre>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .installation-guide {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .installation-step {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .installation-step:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .step-number {
+    background: var(--primary-color);
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+
+  .step-header h3 {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 1.25rem;
+  }
+
+  .command-block {
+    margin-bottom: 1rem;
+  }
+
+  .command-block p {
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+  }
+
+  .command-block pre {
+    background: var(--code-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+
+  .command-block code {
+    color: #ffffff;
+    font-family: 'Monaco', 'Consolas', monospace;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    .installation-guide {
+      padding: 1rem;
+    }
+  }
+</style>

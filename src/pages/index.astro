@@ -1,0 +1,334 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import FeatureCard from '../components/FeatureCard.astro';
+import CommandCard from '../components/CommandCard.astro';
+import DeveloperProfile from '../components/DeveloperProfile.astro';
+import InstallationGuide from '../components/InstallationGuide.astro';
+
+const features = [
+  {
+    title: 'Add Vulnerabilities',
+    description: 'Record new vulnerabilities with detailed descriptions and priority scores',
+    icon: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>'
+  },
+  {
+    title: 'List & Sort',
+    description: 'View all vulnerabilities sorted by priority scores',
+    icon: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>'
+  },
+  {
+    title: 'Update Status',
+    description: 'Keep track of vulnerability remediation progress',
+    icon: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79s7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58s9.14-3.47 12.65 0L21 3v7.12zM12.5 8v4.25l3.5 2.08-.72 1.21L11 13V8h1.5z"/></svg>'
+  },
+  {
+    title: 'Direct Fix',
+    description: 'Fix vulnerabilities via SSH connection to devices',
+    icon: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm4.59-12.42L10 14.17l-2.59-2.58L6 13l4 4 8-8z"/></svg>'
+  }
+];
+
+const commands = [
+  {
+    title: 'Add Vulnerability',
+    command: `risker add --id VULN-001 \\
+    --description "SQL Injection in Login Form" \\
+    --severity High \\
+    --impact High \\
+    --asset_criticality Critical \\
+    --device "Web Server" \\
+    --ip_address 192.168.1.10`
+  },
+  {
+    title: 'List Vulnerabilities',
+    command: 'risker list'
+  },
+  {
+    title: 'Update Status',
+    command: 'risker update --id VULN-001 --status Resolved'
+  },
+  {
+    title: 'Fix Vulnerability',
+    command: `risker fix --id VULN-001 \\
+    --device "Web Server" \\
+    --ip_address 192.168.1.10 \\
+    --username admin \\
+    --password secret`
+  }
+];
+
+const developerInfo = {
+  name: "Suleiman Yahaya Garo (Garogenius)",
+  role: "Cybersecurity Analyst & Software Engineer",
+  bio: "A passionate cybersecurity analyst and software engineer at Syrol Technologies Ltd with over 3 years of experience in developing secure applications and conducting vulnerability assessments. Specializing in automated security tools and risk management solutions.",
+  image: "/developer-image.jpg"
+};
+---
+
+<Layout title="Risker - Automated Risk Assessment Tool">
+  <Navbar />
+  
+  <main>
+    <header class="hero">
+      <div class="hero-content">
+        <h1>Risker Documentation</h1>
+        <p>An automated risk assessment checklist tool for effective vulnerability management</p>
+        <div class="author">
+          <p>Developed by <strong>Garogenius (Suleiman Yahaya Garo)</strong></p>
+          <p>Supported by: 3MTT Program</p>
+        </div>
+      </div>
+      <div class="hero-background"></div>
+    </header>
+
+    <section id="overview" class="section">
+      <h2>Overview</h2>
+      <p class="section-intro">Risker is designed to help security professionals manage vulnerabilities in their systems effectively. It provides a structured way to add, list, update, and fix vulnerabilities, prioritizing them based on severity, impact, and asset criticality.</p>
+      
+      <div class="problem-solution">
+        <div class="card problem">
+          <h3>Problem Statement</h3>
+          <ul>
+            <li>Lack of Structured Documentation</li>
+            <li>Difficulty in Prioritization</li>
+            <li>Inefficient Remediation Processes</li>
+            <li>Fragmented Communication</li>
+          </ul>
+        </div>
+        <div class="card solution">
+          <h3>Solution</h3>
+          <ul>
+            <li>Structured Vulnerability Documentation</li>
+            <li>Prioritization Scoring</li>
+            <li>Streamlined Remediation</li>
+            <li>Centralized Management</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <h2>Features</h2>
+      <div class="features-grid">
+        {features.map(feature => (
+          <FeatureCard {...feature} />
+        ))}
+      </div>
+    </section>
+
+    <section id="installation" class="section">
+      <h2>Installation Guide</h2>
+      <InstallationGuide />
+    </section>
+
+    <section id="usage" class="section">
+      <h2>Usage</h2>
+      <div class="commands">
+        {commands.map(command => (
+          <CommandCard {...command} />
+        ))}
+      </div>
+    </section>
+
+    <section id="developer" class="section">
+      <h2>Meet the Developer</h2>
+      <DeveloperProfile {...developerInfo} />
+    </section>
+
+    <section id="implementation" class="section">
+      <h2>Implementation Details</h2>
+      <div class="implementation-details">
+        <div class="card dependencies">
+          <h3>Dependencies</h3>
+          <ul>
+            <li><strong>paramiko</strong> - SSH connections</li>
+            <li><strong>tabulate</strong> - Table formatting</li>
+            <li><strong>pyfiglet</strong> - ASCII art text</li>
+            <li><strong>termcolor</strong> - Colored output</li>
+            <li><strong>tqdm</strong> - Progress bars</li>
+          </ul>
+        </div>
+        <div class="card file-structure">
+          <h3>File Structure</h3>
+          <p>Main data storage: <code>risker_vulnerabilities.csv</code></p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <p>For further assistance or contributions, contact Garogenius (Suleiman Yahaya Garo)</p>
+        <p>© 2024 Risker. All rights reserved.</p>
+      </div>
+    </footer>
+  </main>
+</Layout>
+
+<style>
+  :root {
+    --primary-color: #2563eb;
+    --primary-dark: #1d4ed8;
+    --text-color: #1f2937;
+    --text-secondary: #4b5563;
+    --bg-color: #ffffff;
+    --card-bg: #f8fafc;
+    --code-bg: #1f2937;
+    --hover-bg: #f1f5f9;
+  }
+
+  main {
+    color: var(--text-color);
+    font-size: 16px;
+    line-height: 1.6;
+    background: var(--bg-color);
+  }
+
+  .hero {
+    position: relative;
+    padding: 8rem 2rem 6rem;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    z-index: 0;
+  }
+
+  .hero h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .hero p {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .author {
+    margin-top: 2rem;
+    font-size: 1rem;
+  }
+
+  .section {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .section-intro {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    text-align: center;
+    color: var(--text-secondary);
+  }
+
+  .problem-solution {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .card {
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .card li {
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .card li::before {
+    content: "•";
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .commands {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .implementation-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .footer {
+    background: var(--card-bg);
+    margin-top: 6rem;
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+
+  .footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .section {
+      padding: 4rem 1rem;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+    }
+  }
+</style>
